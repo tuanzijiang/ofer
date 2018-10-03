@@ -1,6 +1,6 @@
 const path = require('path');
 const { save, readline, read_line, print } = require('./platform');
-const { DATA_TYPE_ENUM } = require(path.resolve(__rootname, '.ofer/ENUM.json'));
+const { DATA_TYPE_ENUM } = __config;
 
 // 创建Data类别的函数映射
 const generateDataFns = {

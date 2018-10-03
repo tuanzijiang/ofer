@@ -4,7 +4,7 @@ const fs = require('fs');
 const usedFns = [];
 const usedStr = [];
 
-const getAllFnsMap = (toolPaths) => toolPaths.reduce((prev, curr) => {
+const getAllToolsMap = (toolPaths) => toolPaths.reduce((prev, curr) => {
   const currToolPath = path.resolve(__rootname, curr);
   if (!fs.existsSync(currToolPath)) {
     return prev;
@@ -18,40 +18,41 @@ const getAllFnsMap = (toolPaths) => toolPaths.reduce((prev, curr) => {
 
   return {
     ...prev,
-    ...currToolFns.reduce((prev, [fnName, fn]) => {
-      prev[fnName] = {
-        fnStr: fn.toString(),
-        fn
+    ...currToolFns.reduce((prev, [toolName, tool]) => {
+      prev[toolName] = {
+        toolStr: tool.toString(),
+        tool,
+        toolType: Object.prototype.toString.call(tool)
       }
       return prev;
     }, {})
   }
 }, {});
 
-const getAllToolFns = (fnsMap) => {
+const getAllToolFns = (toolsMap) => {
   const outputObj = {};
-  const executableStr = Object.entries(fnsMap).reduce((prev, [fnName, fnObj]) => {
-    const { fn, fnStr } = fnObj;
-    if (Object.prototype.toString.call(fn) === '[object Function]') {
+  const executableStr = Object.entries(toolsMap).reduce((prev, [toolName, { toolStr, toolType }]) => {
+    // TODO: 对数字和字符串做区分以及导入的顺序
+    if (toolType === '[object Function]') {
       return `${prev}
-      const ${fnName} = (...param) => {
-        usedFns.push('${fnName}');
-        return (${fnStr})(...param);
+      const ${toolName} = (...param) => {
+        usedFns.push('${toolName}');
+        return toolsMap['${toolName}'].tool(...param);
       };
-      outputObj['${fnName}'] = ${fnName};
+      outputObj['${toolName}'] = ${toolName};
       `
     } else {
       return `${prev}
-      const ${fnName} = ${fnStr};
-      Object.defineProperty(outputObj, '${fnName}', {
+      const ${toolName} = ${toolStr};
+      Object.defineProperty(outputObj, '${toolName}', {
         configurable: true,
         enumerable: true,
         set: function (fn) {
-          return ${fnName};
+          return ${toolName};
         },
         get: function () {
-          usedStr.push('${fnName}');
-          return ${fnName};
+          usedStr.push('${toolName}');
+          return ${toolName};
         }
       }); 
       `
@@ -61,9 +62,9 @@ const getAllToolFns = (fnsMap) => {
   return outputObj;
 };
 
-const getAllOutputFns = (fnsMap) => Object.entries(fnsMap).reduce(
-  (prev, [fnName, { fnStr }]) => {
-    prev[fnName] = `const ${fnName} = ${fnStr}`
+const getAllOutputFns = (toolsMap) => Object.entries(toolsMap).reduce(
+  (prev, [toolName, { toolStr }]) => {
+    prev[toolName] = `const ${toolName} = ${toolStr}`
     return prev;
   }, {}
 );
@@ -71,7 +72,7 @@ const getAllOutputFns = (fnsMap) => Object.entries(fnsMap).reduce(
 const getUsedTools = () => usedStr.concat(usedFns.reverse());
 
 module.exports = {
-  getAllFnsMap,
+  getAllToolsMap,
   getAllOutputFns,
   getAllToolFns,
   getUsedTools
