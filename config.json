@@ -1,0 +1,8 @@
+{
+  "CODE_ROOT": "code",
+  "TOOL_OUT_PATH": ".ofer/tool.js",
+  "OUTPUT_FILE": "output.js",
+  "TOOL_PATHS": [
+    ".ofer/toolHandler/tool.js"
+  ]
+}

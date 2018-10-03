@@ -4,7 +4,6 @@ let currentPoi = 0;
 let outputMap = [];
 const MAXNUM = 1024;
 
-// niuke
 const save = (data, splitChar = '\n') => {
   dataMap = data.split(splitChar);
   currentLine = 0;

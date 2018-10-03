@@ -1,14 +1,19 @@
-const { DATA_TYPE_ENUM } = require('../../../lib/ENUM.js');
+const path = require('path');
+const { B, C } = require(__toolname);
+const { DATA_TYPE_ENUM } = require(path.resolve(__rootname, '.ofer/ENUM.json'));
 
-const dataConfig = {
-  type: DATA_TYPE_ENUM.READ,
+const config = {
+  type: DATA_TYPE_ENUM.DEFAULT,
+  fnName: 'Leetcode',
+  params: ['a', 'b', 'c']
 }
 
 const answer = (...param) => {
-  console.warn(param);
+  B();
+  C;
 }
 
 module.exports = {
-  dataConfig,
+  config,
   answer
 }
