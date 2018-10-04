@@ -1,24 +1,23 @@
 const path = require('path');
 const fs = require('fs');
-const { DATA_TYPE_ENUM } = require(path.resolve(__rootname, '.ofer/ENUM.json'));
+const { DATA_TYPE_ENUM } = __config;
 
 const getAllOutputStr = ({
   IOConfig,
-  outputFnsMap,
+  outputToolsMap,
   usedTools,
   answerStr,
 }) => {
   // 处理依赖项
   let result = usedTools.reduce((prev, curr) => (
-`${prev}${outputFnsMap[curr] || ''}
+`${prev}${outputToolsMap[curr] || ''}
 `), '');
 
   // 处理答案项
   if (DATA_TYPE_ENUM.READ === IOConfig.type) {
-    result = `
-      ${result}
-      (${answerStr})()
-    `
+    result = `${result}
+(${answerStr})()
+`
   } else {
     const { params, fnName } = IOConfig;
     const paramsStr = (params || []).reduce((prev, curr, idx) =>

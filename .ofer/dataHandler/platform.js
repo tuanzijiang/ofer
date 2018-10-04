@@ -7,11 +7,9 @@ const MAXNUM = 1024;
 const save = (data, splitChar = '\n') => {
   dataMap = data.split(splitChar);
   currentLine = 0;
-  console.warn(dataMap);
 };
 
-// const readline = () => dataMap[currentLine++];// 牛客网
-const readline = () => { console.warn(dataMap);};
+const readline = () => dataMap[currentLine++];// 牛客网
 
 const read_line = () => {//赛码网
   let currentInput = dataMap[currentLine];

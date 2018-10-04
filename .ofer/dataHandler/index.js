@@ -1,16 +1,24 @@
-const path = require('path');
-const { save, readline, read_line, print } = require('./platform');
-const { DATA_TYPE_ENUM } = require(path.resolve(__rootname, '.ofer/ENUM.json'));
+const { save, readline, read_line, print, printAll } = require('./platform');
+const { DATA_TYPE_ENUM } = __config;
 
 // 创建Data类别的函数映射
 const generateDataFns = {
-  [DATA_TYPE_ENUM.DEFAULT]: input => [input],
+  [DATA_TYPE_ENUM.DEFAULT]: input => input.split('\n'),
   [DATA_TYPE_ENUM.READ]: input => {
     save(input);
     global.readline = readline;
     global.print = print;
     global.read_line = read_line;
     return [];
+  }
+}
+
+const outputCMDFns = {
+  [DATA_TYPE_ENUM.DEFAULT]: output => {
+    console.log(`输出的结果为：${output}`);
+  },
+  [DATA_TYPE_ENUM.READ]: () => {
+    printAll();
   }
 }
 
@@ -32,6 +40,13 @@ const generateData = ({ type, input }) => {
   return data;
 }
 
+const outputCMD = ({ type, output }) => {
+  const dataType = DATA_TYPE_ENUM[type];
+  const outputCMDFn = outputCMDFns[dataType];
+  outputCMDFn(output);
+}
+
 module.exports = {
-  generateData
+  generateData,
+  outputCMD
 }

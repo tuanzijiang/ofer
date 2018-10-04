@@ -1,4 +1,6 @@
-const digitStr = '0123456789'
+const digitStr = '0123456789';
+// const letterStr = 'abcdefghijklmnopqrstuvwxyz';
+
 const _bigNumAdd = (num1, num2) => {
   const arr1 = num1.toString().split('').map(v => parseInt(v, 10)).reverse();
   const arr2 = num2.toString().split('').map(v => parseInt(v, 10)).reverse();
@@ -17,20 +19,8 @@ const _bigNumAdd = (num1, num2) => {
   return sumArr.reverse().join('');
 }
 
-(() => {
-  const digitMap = digitStr.split('').reduce((prev, curr) => {
-    prev[curr] = true;
-    return prev;
-  }, {});
-  let currLine= null;
-  while(currLine = readline()) {
-    const strs = currLine.split(' ');
-    const arr1 = strs[0].split('');
-    const arr2 = strs[1].split('');
-    if (arr1.every(v => digitMap[v]) && arr2.every(v => digitMap[v])) {
-      print(_bigNumAdd(arr1.join(''), arr2.join('')));
-    } else {
-      print('error');
-    }
-  }
-})()
+module.exports = {
+  _bigNumAdd,
+  digitStr
+  // letterStr
+}
