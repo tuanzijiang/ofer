@@ -15,10 +15,9 @@ const getAllOutputStr = ({
 
   // 处理答案项
   if (DATA_TYPE_ENUM.READ === IOConfig.type) {
-    result = `
-      ${result}
-      (${answerStr})()
-    `
+    result = `${result}
+(${answerStr})()
+`
   } else {
     const { params, fnName } = IOConfig;
     const paramsStr = (params || []).reduce((prev, curr, idx) =>

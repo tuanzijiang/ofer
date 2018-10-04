@@ -1,15 +1,13 @@
-const { B, C } = require(__toolname);
+const { _bigNumAdd } = require(__toolname);
 const { DATA_TYPE_ENUM } = __config;
 
 const config = {
   type: DATA_TYPE_ENUM.DEFAULT,
-  fnName: 'Leetcode',
-  params: ['a', 'b', 'c']
+  fnName: 'addStrings'
 }
 
-const answer = (...param) => {
-  B();
-  C;
+const answer = (num1, num2) => {
+  return _bigNumAdd(num1, num2);
 }
 
 module.exports = {

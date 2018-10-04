@@ -41,6 +41,21 @@ const getAllToolFns = (toolsMap) => {
       };
       outputObj['${toolName}'] = ${toolName};
       `
+    } else if (toolType === '[object String]') {
+      return `${prev}
+      const ${toolName} = ${toolStr};
+      Object.defineProperty(outputObj, '${toolName}', {
+        configurable: true,
+        enumerable: true,
+        set: function (fn) {
+          return ${toolName};
+        },
+        get: function () {
+          usedStr.push('${toolName}');
+          return '${toolStr}';
+        }
+      }); 
+      `
     } else {
       return `${prev}
       const ${toolName} = ${toolStr};
@@ -52,7 +67,7 @@ const getAllToolFns = (toolsMap) => {
         },
         get: function () {
           usedStr.push('${toolName}');
-          return ${toolName};
+          return ${toolStr};
         }
       }); 
       `
@@ -63,8 +78,8 @@ const getAllToolFns = (toolsMap) => {
 };
 
 const getAllOutputFns = (toolsMap) => Object.entries(toolsMap).reduce(
-  (prev, [toolName, { toolStr }]) => {
-    prev[toolName] = `const ${toolName} = ${toolStr}`
+  (prev, [toolName, { toolStr, toolType }]) => {
+    prev[toolName] = toolType === '[object String]' ? `const ${toolName} = '${toolStr}'` : `const ${toolName} = ${toolStr}`;
     return prev;
   }, {}
 );

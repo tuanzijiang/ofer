@@ -32,6 +32,9 @@ const init = (injectConfig) => {
 
   const { fileAnswerPath, fileDataPath } = allFileStates[0];
   try {
+    console.info(`当前运行的答案路径：${fileAnswerPath}`);
+    console.info(`如果不是您希望的路径，请进入你希望的'answer.js'中强制保存，系统会自动读取最近一次的保存代码作为运行代码
+    `);
     global.__toolname = path.resolve(__config.TOOL_PATH);
     const { config: IOConfig, answer } = require(fileAnswerPath);
     global.__toolname = '';
@@ -56,7 +59,12 @@ const init = (injectConfig) => {
     }
 
     // 执行导入的参数
-    answer.apply(this, param);
+    const result = answer.apply(this, param);
+
+    dataHandler.outputCMD({
+      ...IOConfig,
+      output: result
+    })
 
     // 获取使用的tool函数
     const usedTools = toolHandler.getUsedTools();
