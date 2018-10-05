@@ -1,5 +1,5 @@
 const digitStr = '0123456789';
-// const letterStr = 'abcdefghijklmnopqrstuvwxyz';
+const letterStr = 'abcdefghijklmnopqrstuvwxyz';
 
 const _bigNumAdd = (num1, num2) => {
   const arr1 = num1.toString().split('').map(v => parseInt(v, 10)).reverse();
@@ -21,6 +21,6 @@ const _bigNumAdd = (num1, num2) => {
 
 module.exports = {
   _bigNumAdd,
-  digitStr
-  // letterStr
+  digitStr,
+  letterStr
 }
