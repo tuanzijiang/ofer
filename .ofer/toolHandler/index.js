@@ -21,6 +21,13 @@ const getAllToolsMap = (toolPaths) => toolPaths.reduce((prev, curr) => {
     currToolText.indexOf(` ${toolName1} `) - currToolText.indexOf(` ${toolName2} `)
   ));
 
+  // 判断是否有重复的toolName
+  currToolOrder.forEach(currToolName => {
+    if (prev.order.includes(currToolName)) {
+      console.warn(`重复的toolName：${currToolName}`);
+    }
+  })
+
   return {
     entities: {
       ...prev.entities,
@@ -37,9 +44,9 @@ const getAllToolsMap = (toolPaths) => toolPaths.reduce((prev, curr) => {
     order: prev.order.concat(currToolOrder)
   }
 }, {
-  entities: {},
-  order: []
-});
+    entities: {},
+    order: []
+  });
 
 const getAllToolFns = (toolsMap) => {
   const outputObj = {};
