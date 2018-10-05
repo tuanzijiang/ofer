@@ -3,7 +3,8 @@ const { DATA_TYPE_ENUM } = __config;
 
 // 创建Data类别的函数映射
 const generateDataFns = {
-  [DATA_TYPE_ENUM.DEFAULT]: input => input.split('\n'),
+  // TODO: 对字符串和数字进行区分
+  [DATA_TYPE_ENUM.DEFAULT]: input => input.split('\n').map(v => v.replace(/"/g, '')),
   [DATA_TYPE_ENUM.READ]: input => {
     save(input);
     global.readline = readline;
