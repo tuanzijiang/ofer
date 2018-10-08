@@ -16,7 +16,7 @@ const _bigNumAdd = (num1, num2) => {
   return sumArr.reverse().join('');
 }
 
-const addStrings = (num1, num2) => {
+((num1, num2) => {
   // code ...
   return _bigNumAdd(num1, num2);
-}
+})()

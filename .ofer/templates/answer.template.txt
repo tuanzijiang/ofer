@@ -1,0 +1,16 @@
+// const {  } = require(__toolname); // 解构出你需要的“小工具”
+
+const config = {
+  type: DATA_TYPE_ENUM.{{dataType}},// 导入的数据类型
+  fnName: '{{fnName}}'//导出的函数名称，参照平台的函数名称，平台没有也不用填
+}
+
+const answer = () => {
+  // code ...
+
+}
+
+module.exports = {
+  config,
+  answer
+}

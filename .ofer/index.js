@@ -2,19 +2,21 @@ const path = require('path');
 const fs = require('fs');
 const { getConfig } = require('./config');
 
-const init = (injectConfig) => {
-  global.__config = getConfig(injectConfig);
-
+const init = () => {
+  global.__config = getConfig(__rootname);
   const {
     FILE_HANDLER_PATH,
     DATA_HANDLER_PATH,
     TOOL_HANDLER_PATH,
-    OUTPUT_HANDLER_PATH
+    OUTPUT_HANDLER_PATH,
+    DATA_TYPE_ENUM
   } = __config;
+  global.DATA_TYPE_ENUM = DATA_TYPE_ENUM;
   const fileHandler = require(FILE_HANDLER_PATH);
   const dataHandler = require(DATA_HANDLER_PATH);
   const toolHandler = require(TOOL_HANDLER_PATH);
   const outputHandler = require(OUTPUT_HANDLER_PATH);
+  
 
   // 根据rootPath获取每一个含有answer.js和data.txt的文件路径
   const allFilePaths = fileHandler.getAllFilePaths(__config.CODE_PATH);
