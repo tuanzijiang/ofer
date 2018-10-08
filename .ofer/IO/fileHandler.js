@@ -30,6 +30,7 @@ const getAllFileStates = (allFilePaths) => allFilePaths.map(filePath => ({
   )
 }));
 
+
 module.exports = {
   getAllFilePaths,
   getAllFileStates

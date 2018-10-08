@@ -1,5 +1,4 @@
 const { _bigNumAdd, digitStr } = require(__toolname);
-const { DATA_TYPE_ENUM } = __config;
 
 const config = {
   type: DATA_TYPE_ENUM.READ,

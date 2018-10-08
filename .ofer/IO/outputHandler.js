@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const { DATA_TYPE_ENUM } = __config;
 
 const getAllOutputStr = ({
   IOConfig,
@@ -14,7 +13,7 @@ const getAllOutputStr = ({
 `), '');
 
   // 处理答案项
-  if (DATA_TYPE_ENUM.READ === IOConfig.type) {
+  if (!__config.DATA_TYPE_ENUM_ENTITIES[IOConfig.type].fnNameIsRequired) {
     result = `${result}
 (${answerStr})()
 `
