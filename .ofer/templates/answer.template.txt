@@ -2,11 +2,13 @@
  * tips:
  * 1. 可以从__toolname中解构出你提前准备好的“小工具”(函数、字符串、对象...)，它们会自动按照调用顺序打包到输出文件中
  * 2. 'DATA_TYPE_ENUM'决定了如何读取data.txt的内容:
- *    a> 对于“牛客网”,“赛码网”设置成READ，通过readline(),read_line()获取输入，print()输出
+ *    a> 对于“牛客网”,“赛码网”设置成READ，通过readline(),read_line()获取输入，print()输出，这些函数已经注入到了global中，可以直接调用
  *    b> 对于“leetcode”按照题目的要求设置成DEFAULT、TREE等对应的值,return作为输出
  * 3. 'fnName' 决定导出的函数的函数名，对于leetcode是必须设置的，就是题目要求的函数的函数名，记得修改'形参'
  * 4. answer是导出的函数，可以直接被运行，可以直接断点调试
  * 5. 如果全局安装了脚手架ofer-cli，可以调用ofer-cli help 获取'DATA_TYPE_ENUM'等相关帮助
+ * 6. 如果不知道如何操作，可以参考example目录下的例子
+ * 7. 直接在vscode里，用debug工具运行即可。会默认读取最后保存的“题目文件夹”。
  */
 
 // const {  } = require(__toolname); 
