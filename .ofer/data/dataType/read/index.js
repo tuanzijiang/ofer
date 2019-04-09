@@ -2,7 +2,7 @@ const { save, readline, read_line, print, printAll } = require('./platform');
 
 module.exports = {
   name: 'READ',
-  description: '将data按行进行分割并按顺序作为参数传入answer函数中',
+  description: '将data按行进行分割，并通过readline或者read_line进行读入(牛客网和赛码网)',
   handleDataInput: input => {
     save(input);
     global.readline = readline;
