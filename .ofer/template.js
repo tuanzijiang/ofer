@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const ANSWER_TEMPLATE_PATH = './templates/answer.template.txt';
 
 const getTemplate = () => {
