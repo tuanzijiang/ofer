@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es6",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "lib",
+    "rootDirs": [
+      "./"
+    ],
+  }
+}
