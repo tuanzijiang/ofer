@@ -1,9 +1,4 @@
-import { OferStateMachine } from './biz/OferStateMachine/index';
+import { Ofer } from './Ofer';
 
-export class Ofer {
-  private oferStateMachine: OferStateMachine;
-
-  constructor() {
-    this.oferStateMachine = new OferStateMachine;
-  }
-}
+const ofer = new Ofer();
+ofer.run();
