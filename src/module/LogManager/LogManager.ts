@@ -14,15 +14,19 @@ export class LogManager {
     this.logInstance = logInstance;
   }
 
+  public debug(...args) {
+    this.logInstance.debug('[debug]', ...args);
+  }
+
   public info(...args) {
     this.logInstance.info('[info]', ...args);
   }
 
   public warn(...args) {
-    this.logInstance.warn('warn', ...args);
+    this.logInstance.warn('[warn]', ...args);
   }
 
   public error(...args) {
-    this.logInstance.warn('error', ...args);
+    this.logInstance.warn('[error]', ...args);
   }
 }
