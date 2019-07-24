@@ -11,7 +11,9 @@ export class ConfigManager {
   }
 
   public fetchAllConfig() {
+    const logManager = this.ofer.getLogManager();
     this.oferConfig = config;
+    logManager.debug('fetchAllConfig: finish.', JSON.stringify(config));
   }
 
   public getOferConfig() {

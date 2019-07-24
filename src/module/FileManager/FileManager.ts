@@ -12,18 +12,23 @@ export class FileManager {
   }
 
   public getAllProjectDirs(rootPath) {
-    DFSFile(rootPath, this.handleProjectDir, this.isFileNotExist)
+    const logManager = this.ofer.getLogManager();
+    logManager.info('getAllProjectDirs: start.', { rootPath });
+    this.projectDirs = [];
+    DFSFile(rootPath, this.handleProjectDir.bind(this), this.isFileNotExist)
+    logManager.info('getAllProjectDirs: finish.', { projectDirs: this.projectDirs });
+    return this.projectDirs;
   }
 
   private handleProjectDir(currPath: string) {
     const answerPath = path.join(currPath, 'answer.js');
-    const dataPath = path.join(currPath, 'data.js');
+    const dataPath = path.join(currPath, 'data.txt');
     if (fs.existsSync(answerPath) && fs.existsSync(dataPath)) {
       this.projectDirs = this.projectDirs.concat(currPath);
     }
   }
 
   private isFileNotExist(currPath: string) {
-    return !fs.statSync(currPath).isDirectory();
+    return fs.existsSync(currPath) && !fs.statSync(currPath).isDirectory();
   }
 }

@@ -1,4 +1,4 @@
-import { StateManager, FileManager, LogManager, ConfigManager } from './schema';
+import { StateManager, FileManager, LogManager, ConfigManager } from './module';
 
 export class Ofer {
   private stateManager: StateManager;
@@ -7,10 +7,10 @@ export class Ofer {
   private configManager: ConfigManager;
 
   constructor() {
-    this.stateManager = new StateManager(this);
-    this.fileManager = new FileManager(this);
     this.logManager = new LogManager(this);
     this.configManager = new ConfigManager(this);
+    this.stateManager = new StateManager(this);
+    this.fileManager = new FileManager(this);
   }
 
   run() {

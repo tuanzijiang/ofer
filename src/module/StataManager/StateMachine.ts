@@ -33,7 +33,7 @@ export class StateMachine<T extends string, K extends keyof M, M> {
         method(...args);
       }
       this.state = to;
-      this.logInstance.error(
+      this.logInstance.info(
         `stateMachine: state switchs from ${from} to ${to}`
       );
     };
